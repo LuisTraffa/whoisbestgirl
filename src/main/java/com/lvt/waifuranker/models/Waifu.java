@@ -3,31 +3,24 @@ package com.lvt.waifuranker.models;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Waifu {
-
-    private final Long id;
     private String name;
     private double score;
     private String anime;
-
     private String description;
-    private String imageURL;
-    private String quote;
-    private long numberOfVotes;
 
-    public Waifu(@JsonProperty Long id, @JsonProperty String name, @JsonProperty double score, @JsonProperty String anime, @JsonProperty String imageURL,@JsonProperty String description,  @JsonProperty String quote, @JsonProperty Long numberOfVotes) {
-        this.id = id;
+    private String url;
+    private String quote;
+    private long votes;
+
+    public Waifu (@JsonProperty String name, @JsonProperty double score, @JsonProperty String anime,@JsonProperty String description, @JsonProperty String url,  @JsonProperty String quote, @JsonProperty Long votes) {
         this.name = name;
         this.score = score;
         this.anime = anime;
-        this.imageURL = imageURL;
+        this.url = url;
         this.quote = quote;
-        this.numberOfVotes = numberOfVotes;
+        this.votes = votes;
         this.description = description;
 
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getName() {
@@ -42,16 +35,16 @@ public class Waifu {
         return anime;
     }
 
-    public String getImageURL() {
-        return imageURL;
+    public String getUrl() {
+        return url;
     }
 
     public String getQuote() {
         return quote;
     }
 
-    public long getNumberOfVotes() {
-        return numberOfVotes;
+    public long getVotes() {
+        return votes;
     }
 
     public String getDescription() {
@@ -70,16 +63,16 @@ public class Waifu {
         this.anime = anime;
     }
 
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public void setQuote(String quote) {
         this.quote = quote;
     }
 
-    public void setNumberOfVotes(long numberOfVotes) {
-        this.numberOfVotes = numberOfVotes;
+    public void setVotes(long votes) {
+        this.votes = votes;
     }
 
     public void setDescription(String description) {

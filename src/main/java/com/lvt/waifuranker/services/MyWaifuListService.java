@@ -27,7 +27,7 @@ public class MyWaifuListService {
         return myWaifuListRepository.getUserScores(username);
     }
 
-    public void updateWaifu(UUID id, int score) {
+    public void updateWaifu(int score) {
 
     }
 

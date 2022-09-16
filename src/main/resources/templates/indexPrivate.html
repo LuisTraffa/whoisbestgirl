@@ -120,19 +120,14 @@
             <div class="card-header">
               <h3 th:text="'#' + ${iterStat.count} + '   ' + ${waifu.name}" class="my-0 font-weight-normal"/>
             </div>
-            <img src="https://www.racedepartment.com/attachments/26260d6850d544d5d488bfe64f84ef38-jpg.447336/" class="card-img-top" alt="..." th:src="${waifu.getImageURL()}">
+            <img src="https://www.racedepartment.com/attachments/26260d6850d544d5d488bfe64f84ef38-jpg.447336/" class="card-img-top" alt="..." th:src="${waifu.getUrl()}">
             <div class="card-body">
               <h4 th:text="${waifu.anime}" class="card-title"></h4>
               <blockquote class="blockquote mb-1 align-items-stretch">
                 <p th:text="${waifu.getQuote()}"></p>
-                <footer class="blockquote-footer">
-                  <small class="text-muted">
-                    <cite th:text="${waifu.getName()}" title="Source Title"></cite>
-                  </small>
-                </footer>
               </blockquote>
               <p th:text="${waifu.getDescription()}" class="card-text align-items-stretch mt-auto align-self-start"></p>
-              <p th:text="'Score: ' +  ${waifu.score} + '               Votes: ' + ${waifu.numberOfVotes}" class="card-text align-items-stretch mt-auto align-self-start"/>
+              <p th:text="'Score: ' +  ${waifu.score} + '               Votes: ' + ${waifu.votes}" class="card-text align-items-stretch mt-auto align-self-start"/>
 
             </div>
           </div>

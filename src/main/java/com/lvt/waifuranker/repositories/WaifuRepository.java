@@ -12,7 +12,7 @@ public class WaifuRepository {
 
 
             System.out.println("Loading database...");
-            connection = DriverManager.getConnection("jdbc:sqlite:./Database");
+            connection = DriverManager.getConnection("jdbc:sqlite:./DB");
             System.out.println("Connection to SQLite has been established.");
 
 
@@ -33,14 +33,14 @@ public class WaifuRepository {
 
             while (resultSet.next()) {
 
-                waifus.add(new Waifu(resultSet.getLong("id"),
+                waifus.add(new Waifu(
                         resultSet.getString("name"),
                         resultSet.getDouble("score"),
                         resultSet.getString("anime"),
-                        resultSet.getString("imageURL"),
                         resultSet.getString("description"),
+                        resultSet.getString("url"),
                         resultSet.getString("quote"),
-                        resultSet.getLong("votesCount")));
+                        resultSet.getLong("votes")));
             }
 
 
@@ -54,6 +54,16 @@ public class WaifuRepository {
 
     public void updateWaifuScore(Long id, double score) {
         //newAve = ((oldAve*oldNumPoints) + x)/(oldNumPoints+1)
+    }
+
+    public static void main(String[] args) {
+
+        WaifuRepository wf = new WaifuRepository();
+
+        List<Waifu> waifus = wf.getWaifuList();
+
+        System.out.println(waifus.toString());
+
     }
 
 }

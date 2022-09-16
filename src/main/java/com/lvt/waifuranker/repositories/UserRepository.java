@@ -16,7 +16,7 @@ public class UserRepository {
 
 
             System.out.println("Loading database...");
-            connection = DriverManager.getConnection("jdbc:sqlite:./Database");
+            connection = DriverManager.getConnection("jdbc:sqlite:/home/luisvt/Dokumente/Waifuranker/DB");
             System.out.println("Connection to SQLite has been established.");
 
 
@@ -81,6 +81,13 @@ public class UserRepository {
             String insert = "INSERT INTO users (username, password) VALUES ('" + user.getUsername() + "', '" + user.getPassword() + "')";
             PreparedStatement preparedStatement = connection.prepareStatement(insert);
             preparedStatement.executeUpdate();
+
+            Long newUserId = connection.createStatement().executeQuery("Select id FROM users WHERE username = " + "'" + user.getUsername() + "'").getLong("id");
+            System.out.println("User id : " + newUserId);
+
+            String createWaifuList = "CREATE TABLE waifulist" + String.valueOf(newUserId) + " (waifuname TEXT, score INTEGER);";
+            connection.createStatement().executeUpdate(createWaifuList);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -105,7 +112,8 @@ public class UserRepository {
 
         try {
             UserRepository ur = new UserRepository();
-            ur.connection.createStatement().executeUpdate("INSERT INTO users VALUES ('luist', 'Skynet', 0)");
+            User luis = new User("luis4", "1234");
+            ur.addUser(luis);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -59,7 +59,7 @@ public class MyWaifuListRepository {
             ResultSet resultSet = statementSelectUserScores.executeQuery(selectUserScores);
 
             while (resultSet.next()) {
-                userScores.add(new UserScore(resultSet.getLong("id"), resultSet.getLong("score")));
+                userScores.add(new UserScore(resultSet.getString("name"), resultSet.getLong("score")));
             }
 
 
@@ -78,28 +78,28 @@ public class MyWaifuListRepository {
 
             List<UserScore> userScores = getUserScores(username);
 
-            List<Long> waifuIds = new ArrayList<>();
+            List<String> waifuNames = new ArrayList<>();
 
             for (UserScore userScore : userScores) {
-                waifuIds.add(userScore.getId());
+                waifuNames.add(userScore.getName());
             }
 
-            for (Long id : waifuIds) {
+            for (String name : waifuNames) {
 
-                String select = "SELECT * FROM waifus WHERE id = " + id;
+                String select = "SELECT * FROM waifus WHERE name = " + name;
                 Statement statementSelect = connection.createStatement();
                 ResultSet resultSetSelect = statementSelect.executeQuery(select);
 
                 while (resultSetSelect.next()) {
 
-                    waifus.add(new Waifu(resultSetSelect.getLong("id"),
+                    waifus.add(new Waifu(
                             resultSetSelect.getString("name"),
                             resultSetSelect.getDouble("score"),
                             resultSetSelect.getString("anime"),
-                            resultSetSelect.getString("imageURL"),
+                            resultSetSelect.getString("url"),
                             resultSetSelect.getString("description"),
                             resultSetSelect.getString("quote"),
-                            resultSetSelect.getLong("votesCount")));
+                            resultSetSelect.getLong("votes")));
                 }
             }
 

@@ -32,7 +32,7 @@ public class IndexController {
     }
 
     public boolean isWaifuValid(Waifu waifu) {
-        return waifu.getName() != null && waifu.getAnime() != null && waifu.getImageURL() != null && waifu.getQuote() != null && waifu.getScore() > -1;
+        return waifu.getName() != null && waifu.getAnime() != null && waifu.getUrl() != null && waifu.getQuote() != null && waifu.getScore() > -1;
     }
 
 

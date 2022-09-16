@@ -3,81 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="Waifus">
-  <meta name="generator" content="Hugo 0.101.0">
   <title>Waifuranker</title>
 
-  <!--<link rel="canonical" href="https://getbootstrap.com/docs/5.2.0/examples/album/">-->
   <!-- CSS only -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
   <!-- JavaScript Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-
-  <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <script src="search.js" defer></script>
-
-  <style>
-
-    .card-img-top {
-      width: 100%;
-      height: 40vh;
-      object-fit: cover;
-    }
-
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      user-select: none;
-    }
-
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
-
-    .b-example-divider {
-      height: 3rem;
-      background-color: rgba(0, 0, 0, .1);
-      border: solid rgba(0, 0, 0, .15);
-      border-width: 1px 0;
-      box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-    }
-
-    .b-example-vr {
-      flex-shrink: 0;
-      width: 1.5rem;
-      height: 100vh;
-    }
-
-    .bi {
-      vertical-align: -.125em;
-      fill: currentColor;
-    }
-
-    .nav-scroller {
-      position: relative;
-      z-index: 2;
-      height: 2.75rem;
-      overflow-y: hidden;
-    }
-
-    .nav-scroller .nav {
-      display: flex;
-      flex-wrap: nowrap;
-      padding-bottom: 1rem;
-      margin-top: -1px;
-      overflow-x: auto;
-      text-align: center;
-      white-space: nowrap;
-      -webkit-overflow-scrolling: touch;
-    }
-  </style>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -101,44 +32,63 @@
         <h1 class="fw-light">Top Waifus</h1>
         <p class="lead text-muted">Find out who the most popular waifus are...</p>
         <p>
-        <form class="d-flex" role="search">
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Search...">
+          <div class="search-wrapper">
+            <label for="search"></label>
+            <input type="search" id="search" placeholder="Search..." data-search>
           </div>
-        </form>
         </p>
       </div>
     </div>
   </section>
 
+  <template data-waifu-template>
+    <div class="col mb-3 d-flex col-sm align-items-stretch">
+      <div class="card shadow-sm col-sm h-100">
+        <div class="card-header" data-header>
+          <h4 data-name></h4>
+        </div>
+        <img src="" alt="" class="card-img-top" data-photo>
+        <div class="card-body" data-body>
+          <h4 data-anime class="card-text"></h4>
+          <blockquote class="blockquote mb-1 align-items-stretch">
+            <p class="card-text" data-quote></p>
+          </blockquote>
+          <p class="card-text align-items-stretch mt-auto align-self-start" data-description></p>
+          <p class="card-text align-items-stretch mt-auto align-self-start" data-score></p>
+        </div>
+      </div>
+    </div>
+  </template>
+
   <div class="album py-4 bg-light">
     <div class="container">
 
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 gy-3" data-waifu-cards-container></div>
 
-
+      <!--
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 gy-3">
+
+
         <div class="col mb-3 d-flex col-sm align-items-stretch" th:each="waifu,iterStat: ${waifus}">
           <div class="card shadow-sm col-sm h-100">
             <div class="card-header">
               <h3 th:text="'#' + ${iterStat.count} + '   ' + ${waifu.name}" class="my-0 font-weight-normal"/>
             </div>
-            <img src="https://www.racedepartment.com/attachments/26260d6850d544d5d488bfe64f84ef38-jpg.447336/" class="card-img-top" alt="..." th:src="${waifu.getImageURL()}">
+            <img src="https://www.racedepartment.com/attachments/26260d6850d544d5d488bfe64f84ef38-jpg.447336/" class="card-img-top" alt="..." th:src="${waifu.getUrl()}">
             <div class="card-body">
               <h4 th:text="${waifu.anime}" class="card-title"></h4>
               <blockquote class="blockquote mb-1 align-items-stretch">
                 <p th:text="${waifu.getQuote()}"></p>
-                <footer class="blockquote-footer">
-                  <small class="text-muted">
-                    <cite th:text="${waifu.getName()}" title="Source Title"></cite>
-                  </small>
-                </footer>
               </blockquote>
               <p th:text="${waifu.getDescription()}" class="card-text align-items-stretch mt-auto align-self-start"></p>
-              <p th:text="'Score: ' +  ${waifu.score} + '               Votes: ' + ${waifu.numberOfVotes}" class="card-text align-items-stretch mt-auto align-self-start"/>
+              <p th:text="'Score: ' +  ${waifu.score} + '               Votes: ' + ${waifu.votes}" class="card-text align-items-stretch mt-auto align-self-start"/>
 
             </div>
           </div>
         </div>
+
+        --->
+
 
 
 
@@ -157,15 +107,56 @@
   </div>
 </footer>
 
-
-<script src="../assets/dist/js/bootstrap.bundle.min.js">
-
-  function updateRangeValue(val) {
-    document.getElementById('displayCustomRange3').innerHTML=val;
-  }
-
-</script>
-
-
 </body>
 </html>
+
+<script>
+
+  const waifuCardTemplate = document.querySelector("[data-waifu-template]")
+  const waifuCardContainer = document.querySelector("[data-waifu-cards-container]")
+  const searchInput = document.querySelector("[data-search]")
+
+
+  let users = []
+
+  searchInput.addEventListener("input", e => {
+    const value = e.target.value.toLowerCase()
+    users.forEach(user => {
+      const isVisible = user.name.toLowerCase().includes(value) || user.anime.toLowerCase().includes(value)
+      if (isVisible) {
+        user.element.setAttribute("style", "display: block")
+      } else {
+        user.element.setAttribute("style", "display: none !important")
+      }
+
+    })
+
+  })
+
+  let rank = 1
+
+  fetch("/waifus")
+          .then(res => res.json())
+          .then(data => {
+            users = data.map(user => {
+              console.log(user)
+              const card = waifuCardTemplate.content.cloneNode(true).children[0]
+              const name = card.querySelector("[data-name]")
+              const photo = card.querySelector("[data-photo]")
+              const anime = card.querySelector("[data-anime]")
+              const quote = card.querySelector("[data-quote]")
+              const description = card.querySelector("[data-description]")
+              const score = card.querySelector("[data-score]")
+              name.textContent = "#" + rank + " " +  user.name
+              rank++
+              photo.src = user.url
+              anime.textContent = user.anime
+              quote.textContent = user.quote
+              description.textContent = user.description
+              score.textContent = "Score: " + user.score + " Votes: " + user.votes
+              waifuCardContainer.append(card)
+              return { name: user.name, score: user.score, anime: user.anime, description: user.description, url: user.url, quote: user.quote, votes: user.votes,  element: card }
+            })
+
+          })
+</script>
